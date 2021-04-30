@@ -1,0 +1,18 @@
+@startuml
+rectangle "宅内" {
+    object "Echonet Liteコントローラ" as Controller
+    rectangle "Echonet Lite機器"{
+        object "Wi-SUNゲートウェイ" as WisunGW #orange
+        note right: 本装置
+        object "エアコン、エコキュートなど" as Aircon{
+        }
+    }
+}
+object "スマートメータ" as smartmeter{
+    - 各プロパティ
+}
+
+Controller <-d-> WisunGW :Ethenet
+WisunGW <-d-> smartmeter :Wi-SUN
+Controller <-d-> Aircon
+@enduml
