@@ -23,8 +23,8 @@
   - [Wio Terminal 用 Ethernet HAT キット](https://www.windesign.work/%e8%a3%bd%e5%93%81%e4%b8%80%e8%a6%a7/%e3%83%8f%e3%83%bc%e3%83%89%e3%82%a6%e3%82%a7%e3%82%a2/wio-terminal%e5%90%91%e3%81%91wiz550io%e5%a4%89%e6%8f%9b%e5%9f%ba%e6%9d%bf/wio-terminal%e7%94%a8ethernet-hat%e3%82%ad%e3%83%83%e3%83%88)
   - [ラズパイ用 Wi-SUN インタフェースボード](https://www.windesign.work/%e8%a3%bd%e5%93%81%e4%b8%80%e8%a6%a7/%e3%83%8f%e3%83%bc%e3%83%89%e3%82%a6%e3%82%a7%e3%82%a2/rpiwi-001)
   - ラズパイ用スタッキングコネクタ
-    - [8.5mm 高](https://akizukidenshi.com/catalog/g/gC-02485/)
     - [13.5mm 高](https://akizukidenshi.com/catalog/g/gC-10702/)
+      - 5mm のスペーサ部分を除去して、8.5mm 高のコネクタとして使用します。
   - Wi-SUN 通信モジュール接続用コネクタ
     - [1 列 ×9pin（FSM-41052-09）](https://hirosugi.co.jp/products/N/FSM-41.html)
     - [2 列 ×9pin（FSM-42052-09）](https://hirosugi.co.jp/products/N/FSM-42.html)
