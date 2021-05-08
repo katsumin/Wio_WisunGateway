@@ -106,12 +106,22 @@ void loop()
     if (preEpoch != epoch)
     {
         preEpoch = epoch;
-        byte *heap = new byte[4];
-        debug_printfln(true, "heap:%p", heap);
-        delete[] heap;
+        // byte *heap = new byte[4];
+        // debug_printfln(true, "heap:%p", heap);
+        // delete[] heap;
 
         headView.update();
         viewController.update();
+
+        if (epoch % (24 * 60 * 60) == 0)
+        {
+            // 思った以上に時刻ずれが大きいので、1日ごとにNTP時刻合わせ
+            debug_timestamp();
+            debug_println("NTP update.");
+            ntc.update();
+            debug_timestamp();
+            debug_println("NTP updated.");
+        }
     }
     if (btnA.isEnable() && btnA.getButton()->wasPressed())
     {

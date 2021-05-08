@@ -243,8 +243,8 @@ static boolean activescan(uint8_t **recv_data, uint8_t **scan_data)
                 }
                 else
                 {
-                    delete[] res.data;
                     debug_printfln(true, "%p\tresult:%02d, ch:%02d", res.data, res.data[0], res.data[1]);
+                    delete[] res.data;
                 }
             }
             else
@@ -628,22 +628,25 @@ int BP35C0_J1::read()
             if (xQueueReceive(qh, &res, portMAX_DELAY) == pdPASS)
             {
                 debug_printfln(true, "cmd: %04x", res.cmd);
-                if (res.cmd == INF_RECV_DATA && res.data != nullptr)
+                if (res.data != nullptr)
                 {
-                    // ヘッダ部分をオフセット
-                    // 送信元IPアドレス(16)、送信元ポート(2)、送信先ポート(2)、送信元PAN-ID(2)、送信先アドレス種別(1)、暗号化(1)、RSSI(1)
-                    int offset = 16 + 2 + 2 + 2 + 1 + 1 + 1;
-                    len = res.data[offset] << 8 | res.data[offset + 1]; // 受信データ数(2)
-                    offset += 2;
-                    // debug_printfln("res.len:%d, len:%d, offset:%d", res.len, len, offset);
-                    if (res.len == len + offset && len < sizeof(_rbuf))
+                    if (res.cmd == INF_RECV_DATA)
                     {
-                        // debug_printfln("copy len:%d", len);
-                        // 正常なデータを受信
-                        memcpy(_rbuf, &res.data[offset], len);
+                        // ヘッダ部分をオフセット
+                        // 送信元IPアドレス(16)、送信元ポート(2)、送信先ポート(2)、送信元PAN-ID(2)、送信先アドレス種別(1)、暗号化(1)、RSSI(1)
+                        int offset = 16 + 2 + 2 + 2 + 1 + 1 + 1;
+                        len = res.data[offset] << 8 | res.data[offset + 1]; // 受信データ数(2)
+                        offset += 2;
+                        // debug_printfln("res.len:%d, len:%d, offset:%d", res.len, len, offset);
+                        if (res.len == len + offset && len < sizeof(_rbuf))
+                        {
+                            // debug_printfln("copy len:%d", len);
+                            // 正常なデータを受信
+                            memcpy(_rbuf, &res.data[offset], len);
+                        }
+                        else
+                            len = 0;
                     }
-                    else
-                        len = 0;
                     delete[] res.data;
                 }
             }
